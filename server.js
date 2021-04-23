@@ -1,5 +1,7 @@
 const express = require("express");
 const app  = express();
+const path = require("path")
+const fs = require("fs")
 
 app.use(express.json())
 
@@ -16,6 +18,28 @@ const courses = [
 ];
 
 const user = [{'image': 'user.png', 'name': 'Anuoluwapo', 'email': 'EE5043@live.mdx.ac.uk', 'password': 'mypassword'}];
+
+app.use(function(request, response, next){
+  console.log("In comes a" + request.method + " to: " + request.url);
+  next();
+});
+
+app.use(function(req, res, next){
+  var filePath = path.join(__dirname, "static", req.url)
+  fs.stat(filePath, function(err, fileInfo){
+      if(err){
+          next();
+          return;
+      }
+      if(fileInfo.isFile()) res.sendFile(filePath)
+      else next()
+  })
+})
+
+app.use(function(req, res){
+  res.status(404)
+  res.send('File not found')
+})
 
 
 // Connect to MongoDb Atlas
