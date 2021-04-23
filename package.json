@@ -1,0 +1,25 @@
+{
+  "name": "individual-coursework-2",
+  "version": "1.0.0",
+  "description": "Week 8 Individual Coursework",
+  "main": "lessons.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anu-oluwapo/MDX-Coursework-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anu-oluwapo/MDX-Coursework-2/issues"
+  },
+  "homepage": "https://github.com/Anu-oluwapo/MDX-Coursework-2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6",
+    "nodemon": "^2.0.7"
+  }
+}
