@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue week 8 Individual Coursework</title>
+    <title>Week 12 Individual Coursework</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://kit.fontawesome.com/7080cd0a09.js" crossorigin="anonymous"></script>
@@ -169,12 +169,16 @@
     </div>
 
     <script>
-        var vm = new Vue({
+        var app = new Vue({
             el: "#app",
             data: {
                 showProd: true,
                 sitename: 'Lesson Booking',
                 sitename2: 'Shopping Cart',
+
+                lesson: [],
+
+                cart: [],
 
                 sort: {
                     sortingMethod: "location",
@@ -200,15 +204,31 @@
                     CA: 'Canada',
                     NV: 'Nevada',
                 },
+
                 user: {
                     id: '',
                     name: '',
                     number: '',
                 },
-                lesson: lessonsArray,
 
-                cart: [],
 
+
+            },
+
+            created: function () {
+                var fetchreq = 'http://localhost:2000/collection/lessonInfo';
+                console.log('requesting data from server ...')
+                fetch(fetchreq).then(
+                    function (response) {
+                        response.json().then(
+                            function (json) {
+                                // save the returned JSON object to
+                                // 'product' data property
+                                app.lesson = json;
+                                console.log(json);
+                            });
+                    }
+                )
             },
 
             methods: {
@@ -254,6 +274,8 @@
 
 
             },
+
+
 
             computed: {
                 cartItemCount: function (lessons) {

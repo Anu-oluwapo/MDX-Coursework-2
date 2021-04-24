@@ -20,7 +20,7 @@ const courses = [
 const user = [{'image': 'user.png', 'name': 'Anuoluwapo', 'email': 'EE5043@live.mdx.ac.uk', 'password': 'mypassword'}];
 
 app.use(function(request, response, next){
-  console.log("In comes a" + request.method + " to: " + request.url);
+  console.log("In comes a " + request.method + " Request to: " + request.url);
   next();
 });
 
@@ -33,13 +33,13 @@ app.use(function(req, res, next){
       }
       if(fileInfo.isFile()) res.sendFile(filePath)
       else next()
-  })
-})
+  });
+});
 
-app.use(function(req, res){
-  res.status(404)
-  res.send('File not found')
-})
+// app.use(function(req, res){
+//   res.status(404)
+//   res.send('File not found')
+// })
 
 
 // Connect to MongoDb Atlas
@@ -61,10 +61,13 @@ const MongoClient = require('mongodb').MongoClient;
  })
 
  //Retrieve all the objects from a collection within MongoDB
- app.get('collection/:collectionName', (req, res) =>{
+ app.get('/collection/:collectionName', (req, res) =>{
      req.collection.find({}).toArray((e, results) => {
          if (e) return next(e)
-         res.send(results)
+         res.setHeader('Access-Control-Allow-Origin', '*');
+         res.writeHead(200, {'Content-Type': 'text/plain'});
+         res.end(JSON.stringify(results));
+         
      })
  })
 
