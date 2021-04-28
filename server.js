@@ -9,7 +9,8 @@ const cors = require('cors')
 app.use(express.json())
 
 const http = require('http');
-const port = 2000;
+const port = process.env.PORT || 2000
+app.listen(port);
 const server = http.createServer(app);
 
 
