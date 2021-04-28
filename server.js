@@ -2,7 +2,6 @@ const express = require("express");
 const app  = express();
 const path = require("path")
 const fs = require("fs")
-const cors = require('cors')
 
 
 
@@ -13,14 +12,14 @@ const port = process.env.PORT || 2000
 const server = http.createServer(app);
 
 
-const courses = [
-    { 'topic': 'math', 'location': 'hendon', 'price': 100 },
-    { 'topic': 'math', 'location': 'colindale', 'price': 80 },
-    { 'topic': 'math', 'location': 'brent cross', 'price': 90 },
-    { 'topic': 'math', 'location': 'golders green', 'price': 120 },
-];
+// const courses = [
+//     { 'topic': 'math', 'location': 'hendon', 'price': 100 },
+//     { 'topic': 'math', 'location': 'colindale', 'price': 80 },
+//     { 'topic': 'math', 'location': 'brent cross', 'price': 90 },
+//     { 'topic': 'math', 'location': 'golders green', 'price': 120 },
+// ];
 
-const user = [{'image': 'user.png', 'name': 'Anuoluwapo', 'email': 'EE5043@live.mdx.ac.uk', 'password': 'mypassword'}];
+// const user = [{'image': 'user.png', 'name': 'Anuoluwapo', 'email': 'EE5043@live.mdx.ac.uk', 'password': 'mypassword'}];
 
 app.use(function(request, response, next){
   console.log("In comes a " + request.method + " Request to: " + request.url);
