@@ -1,5 +1,0 @@
-Github Repository :
-https://github.com/Anu-oluwapo/Vue-Individual-coursework
-
-Github Pages :
-https://anu-oluwapo.github.io/Vue-Individual-coursework/
