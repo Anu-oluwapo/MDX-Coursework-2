@@ -10,7 +10,6 @@ app.use(express.json())
 
 const http = require('http');
 const port = process.env.PORT || 2000
-app.listen(port);
 const server = http.createServer(app);
 
 
