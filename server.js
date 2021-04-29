@@ -2,14 +2,20 @@ const express = require("express");
 const app  = express();
 const path = require("path")
 const fs = require("fs")
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+app.use(bodyParser.json())
+app.use(cors())
 
 
 
 app.use(express.json())
 
 const http = require('http');
-const port = process.env.PORT || 2000
+const port = process.env.PORT || 2000;
 const server = http.createServer(app);
+
 
 
 // const courses = [
