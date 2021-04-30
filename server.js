@@ -13,19 +13,9 @@ app.use(cors())
 app.use(express.json())
 
 const http = require('http');
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 2000;;
 const server = http.createServer(app);
 
-
-
-// const courses = [
-//     { 'topic': 'math', 'location': 'hendon', 'price': 100 },
-//     { 'topic': 'math', 'location': 'colindale', 'price': 80 },
-//     { 'topic': 'math', 'location': 'brent cross', 'price': 90 },
-//     { 'topic': 'math', 'location': 'golders green', 'price': 120 },
-// ];
-
-// const user = [{'image': 'user.png', 'name': 'Anuoluwapo', 'email': 'EE5043@live.mdx.ac.uk', 'password': 'mypassword'}];
 
 app.use(function(request, response, next){
   console.log("In comes a " + request.method + " Request to: " + request.url);
@@ -92,40 +82,33 @@ app.post('/collection/:collectionName', (req,res,next) => {
 }
 })
 
-//  // Update an object by ID
-//  app.put('/collection/:collectionName/:id', (req, res, next) => {
-//     req.collection.update(
-//         { _id: new ObjectID(req.params.id)},
-//         {$set: req.body},
-//         {safe: true, multi: false},
-//         (e, result) => {
-//             if (e) return next (e)
-//             res.send ((result.result.n === 1) ? { msg: 'success'} : {msg: 'error'})
-//         }
-//     )
-//  })
 
-// // Delete An object By ID
-// app.delete('/collection/:collectionName/:id', (req, res, next) =>{
-//     req.collection.deleteOne(
-//         {_id: ObjectID(req.params.id)},
-//         (e, result) => {
-//             if (e) return next(e)
-//             res.send(result.result.n === 1) ? {msg: 'success'} : {msg : 'error'}
-//         })
-// })
+app.put('/collection/:collectionName', (req,res,next) => {
+    req.collection.bulkWrite(
+        req.body.map(lesson => {
+            return {
+                updateMany : {
+                    filter : {
+                        id:lesson.id
+                    },
+                    update : {
+                        $set:{
+                            id:lesson.id, 
+                            subject:lesson.subject,
+                            location:lesson.location,
+                            price:lesson.price,
+                            availablespace:lesson.availablespace,
+                            rating:lesson.rating,
+                        }
+                    }
+                }
+            }
+        })
+    )
+res.status(202).send();
 
-// app.get('/lesson', (req, res) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-//   res.end(JSON.stringify(courses));
-// });
+   })
 
-// app.get('/checkout', (req, res) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-//   res.end(JSON.stringify(user));
-// });
 
 server.listen(port);
 console.log('Sever Is Now Running On Port 2000');
