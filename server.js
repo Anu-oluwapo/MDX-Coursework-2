@@ -55,7 +55,7 @@ const MongoClient = require('mongodb').MongoClient;
 
  // Display Message for the root path to show the API is working
  app.get('/', (req, res) =>{
-     res.send('Api is working, Please select a collection, eg collection/messages');
+     res.send('Api is working, Please select a collection, eg /collection/lessonInfo Or /collection/orderInfo');
  })
 
  //Retrieve all the objects from a collection within MongoDB
